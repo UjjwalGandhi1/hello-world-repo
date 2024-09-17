@@ -8,20 +8,24 @@ jobs:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: echo "$GITHUB_CONTEXT"
+        run: echo "$GITHUB_CONTEXT" >> context.txt && echo "________________________________"  >> context.txt
       - name: Dump job context
         env:
           JOB_CONTEXT: ${{ toJson(job) }}
-        run: echo "$JOB_CONTEXT"
+        run: echo "$JOB_CONTEXT" >> context.txt && echo "________________________________"  >> context.txt
       - name: Dump steps context
         env:
           STEPS_CONTEXT: ${{ toJson(steps) }}
-        run: echo "$STEPS_CONTEXT"
+        run: echo "$STEPS_CONTEXT" >> context.txt && echo "________________________________"  >> context.txt
       - name: Dump runner context
         env:
           RUNNER_CONTEXT: ${{ toJson(runner) }}
-        run: echo "$RUNNER_CONTEXT"
+        run: echo "$RUNNER_CONTEXT" >> context.txt && echo "________________________________"  >> context.txt
       - name: Dump strategy context
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }}
-        run: echo "$SECRETS_CONTEXT"
+        run: echo "$SECRETS_CONTEXT" >> context.txt && echo "________________________________"  >> context.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: my-artifact
+          path: context.txt
