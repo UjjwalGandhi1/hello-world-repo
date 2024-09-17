@@ -1,11 +1,13 @@
 name: Hello World
 
-on: 
-    schedule:
-        - cron: "*/1 * * * *"
+on:
+    workflow_dispatch:  
+#    schedule:
+#        - cron: "*/1 * * * *"
 
 jobs:
     hello-jobs:
+        timeout-minutes: 1
         runs-on: ubuntu-latest
         steps:
             - name: Echo text
